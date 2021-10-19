@@ -16,7 +16,8 @@ export const Publish: React.FC<{}> = () => {
           hashnodeAuth: ''
         },
         onSubmit: (values: any) => {
-          console.log(values)
+            console.log(blog)
+            console.log(values)
         },
     })
     return (
@@ -122,9 +123,7 @@ export const Publish: React.FC<{}> = () => {
                     <div style={{ margin: 'auto', width: '10%' }}>
                         <Button
                             variant='contained'
-                            onClick={() => {
-                                console.log('Hello')
-                            }}
+                            type='submit'
                             style={{
                                 backgroundColor: '#FEDBD0',
                                 color: '#442C2E',
