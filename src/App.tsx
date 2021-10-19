@@ -1,12 +1,17 @@
 import React from 'react'
-import Appbar from './components/Appbar'
-import { Editor } from './components/Editor'
+import { Home } from './components/Pages/Home/Home'
+import { Publish } from './components/Pages/Publish/Publish'
+import { HashRouter, Switch, Route } from 'react-router-dom'
 
 function App() {
   return (
     <>
-      <Appbar />
-      <Editor />
+      <HashRouter>
+        <Switch>
+          <Route path='/' component={Home} exact />
+          <Route path='/publish' component={Publish} />
+        </Switch>
+      </HashRouter>
     </>
   )
 }
