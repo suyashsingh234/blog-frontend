@@ -1,10 +1,12 @@
 import React from 'react'
-import Appbar from '../../Common/Appbar'
+import { useAppSelector } from '../../../redux/hooks'
+import { Appbar } from '../../Common/Appbar'
 
 export const Publish: React.FC<{}> = () => {
+    const blog = useAppSelector((state) => state.BlogState.blog)
     return (
         <>
-            <Appbar />
+            <Appbar back={ true } />
             <h1>Publish Page</h1>
         </>
     )
