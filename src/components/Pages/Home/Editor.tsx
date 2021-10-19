@@ -11,7 +11,18 @@ export const Editor: React.FC<{}> = () => {
                 <EditorJs data={data} tools={EDITOR_TOOLS} onChange={(api: any, data: any) => { setData(data.blocks) }} />
             </div>
             <div style={{ margin: 'auto', width: '10%' }}>
-                <Button variant='contained' onClick={() => { console.log(data) }} style={{ backgroundColor: '#FEDBD0', color: '#442C2E' }}>Contained</Button>
+                <Button
+                    variant='contained'
+                    onClick={() => {
+                        console.log(data)
+                    }}
+                    style={{
+                        backgroundColor: '#FEDBD0',
+                        color: '#442C2E'
+                    }}
+                >
+                    Contained
+                </Button>
             </div>
         </>
     )
