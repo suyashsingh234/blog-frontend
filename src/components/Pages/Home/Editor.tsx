@@ -34,7 +34,12 @@ export const Editor: React.FC<{}> = () => {
                     style={{
                         backgroundColor: '#FEDBD0',
                         color: '#442C2E',
-                        marginBottom: '3rem'
+                        marginBottom: '3rem',
+                        paddingLeft: '1rem',
+                        paddingRight: '1rem',
+                        paddingTop: '0.5rem',
+                        paddingBottom: '0.5rem',
+                        borderRadius: '5px'
                     }}
                 >
                     Publish

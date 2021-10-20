@@ -1,7 +1,10 @@
 import React from 'react'
+import Badge from '@mui/material/Badge'
+import Tooltip from '@mui/material/Tooltip'
 import { useHistory } from 'react-router-dom'
 import { ArrowBack } from '@mui/icons-material'
-import { AppBar, IconButton, Toolbar, Typography } from '@mui/material'
+import HelpIcon from '@mui/icons-material/Help'
+import { AppBar, IconButton, Toolbar, Typography, Box } from '@mui/material'
 
 export const Appbar: React.FC<{ back?: boolean}> = ({ back }) => {
     let history = useHistory()
@@ -29,9 +32,18 @@ export const Appbar: React.FC<{ back?: boolean}> = ({ back }) => {
                         <>
                         </>
                     )}
-                    <Typography variant='h6' color='inherit' component='div' style={{ color: '#442C2E', fontSize: '48px' }}>
+                    <Typography variant='h6' color='inherit' component='div' style={{ color: '#442C2E', fontSize: '48px', cursor: 'pointer' }} onClick={() => { history.push('/') }}>
                         Blog Post
                     </Typography>
+                    <Tooltip title='Help' placement='bottom'>
+                        <Box sx={{ display: { xs: 'none', md: 'flex' }, marginLeft: '0.5rem' }}>
+                            <IconButton size='large' aria-label='show 1 notification' color='inherit' style={{ color: '#442C2E' }} onClick={() => { history.push('/help') }}>
+                                <Badge badgeContent={1} color='error'>
+                                    <HelpIcon />
+                                </Badge>
+                            </IconButton>
+                        </Box>
+                    </Tooltip>
                 </Toolbar>
             </AppBar>
         </>

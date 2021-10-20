@@ -22,60 +22,62 @@ function JSONtoHTML(article: any) {
     for(var i=0;i<totalMessages;i++) {
         var type=article.blocks[i].type;
         if(type === 'paragraph') {
-             text+='<p>';
-             text+=article.blocks[i].data.text;
-             text+='</p>';
+             text += '<p>';
+             text += article.blocks[i].data.text;
+             text += '</p>';
         } else if(type === 'table') {
-            text+='<table>';
+            text += '<table>';
             var Rows=article.blocks[i].data.content.length;
             for(var j=0;j<Rows;j++) {
-                text+='<tr>';
+                text += '<tr>';
                 var Cols=article.blocks[i].data.content[j].length;
                 for(var k=0;k<Cols;k++) {
-                    text+='<td>';
-                    text+=article.blocks[i].data.content[j][k];
-                    text+='</td>';
+                    text += '<td>';
+                    text += article.blocks[i].data.content[j][k];
+                    text += '</td>';
                 }
-                text+='</tr>';
+                text += '</tr>';
             }
-            text+='</table>';
+            text += '</table>';
         } else if(type === 'list') {
             if(article.blocks[i].data.style === 'ordered') {
-                text+='<ol>';
+                text += '<ol>';
                 var No=article.blocks[i].data.items.length;
                 for(var t=0;t<No;t++) {
-                    text+='<li>';
-                    text+=article.blocks[i].data.items[t];
-                    text+='</li>';
+                    text += '<li>';
+                    text += article.blocks[i].data.items[t];
+                    text += '</li>';
                 }
-                text+='</ol>';
+                text += '</ol>';
             }
             else {
-                text+='<ul>';
+                text += '<ul>';
                 var NO=article.blocks[i].data.items.length;
                 for(var m=0;m<NO;m++) {
-                    text+='<li>';
-                    text+=article.blocks[i].data.items[m];
-                    text+='</li>';
+                    text += '<li>';
+                    text += article.blocks[i].data.items[m];
+                    text += '</li>';
                 }
-                text+='</ul>';
+                text += '</ul>';
             }
         } else if(type === 'header') {
             var p=article.blocks[i].data.level;
-            text+='<h'+p+'>';
-            text+=article.blocks[i].data.text;
-            text+='</h'+p+'>';
+            text += '<h'+p+'>';
+            text += article.blocks[i].data.text;
+            text += '</h'+p+'>';
         } else if(type === 'checklist') {
             var len=article.blocks[i].data.items.length;
             for(var e=0;e<len;e++) {
                 var temp='a'+e;
-                text+='<input type=\'checkbox\'';
-                text+=' id='+temp+' name='+temp;
-                text+='>';
-                text+='<label for='+temp+'>';
-                text+=article.blocks[i].data.items[e].text;
-                text+='</label>';
+                text += '<input type=\'checkbox\'';
+                text += ' id='+temp+' name='+temp;
+                text += '>';
+                text += '<label for='+temp+'>';
+                text += article.blocks[i].data.items[e].text;
+                text += '</label>';
             }
+        } else if(type === 'delimiter') {
+            text += '<hr>'
         }
     }
     return text;
@@ -85,9 +87,9 @@ export class Api {
     static publishArticle(article: any, title: string, tags: string[], hashnodeToken: string, mediumToken: string, devtoToken: string) {
         var HTMLarticle = JSONtoHTML(article)
         var url = baseUrl + 'post?'
-        url += hashnodeToken ? `&hashnode=True&hashnodeToken=${hashnodeToken}` : `hashnode=$False`
-        url += mediumToken ? `&medium=True&mediumToken=${mediumToken}` : `medium=$False`
-        url += devtoToken ? `&devto=True&devtoToken=${devtoToken}` : `devto=$False`
+        url  +=  hashnodeToken ? `&hashnode=True&hashnodeToken=${hashnodeToken}` : `hashnode=$False`
+        url  +=  mediumToken ? `&medium=True&mediumToken=${mediumToken}` : `medium=$False`
+        url  +=  devtoToken ? `&devto=True&devtoToken=${devtoToken}` : `devto=$False`
         try {
             return (
                 axios.post(url, {
