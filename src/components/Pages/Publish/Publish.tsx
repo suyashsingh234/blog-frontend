@@ -1,4 +1,5 @@
 import React from 'react'
+import './publish.css'
 import { useFormik } from 'formik'
 import { Api } from '../../../Api'
 import { Field, FormikProvider } from 'formik'
