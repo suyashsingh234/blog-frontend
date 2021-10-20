@@ -1,23 +1,25 @@
 import React from 'react'
 import { useFormik } from 'formik'
+import { Api } from '../../../Api'
+import { Field, FormikProvider } from 'formik'
 import { Appbar } from '../../Common/Appbar'
 import { useAppSelector } from '../../../redux/hooks'
-import { TextField, Button, Grid } from '@mui/material'
+import { ChipInput } from 'material-ui-formik-components'
+import { TextField, Button, Grid, Typography } from '@mui/material'
 
 export const Publish: React.FC<{}> = () => {
     const blog = useAppSelector((state) => state.BlogState.blog)
     const formik = useFormik({
         initialValues: {
+          title: '',
+          tags: [],
           mediumToken: '',
-          mediumAuth: '',
-          devToken: '',
-          devAuth: '',
-          hashnodeToken: '',
-          hashnodeAuth: ''
+          devtoToken: '',
+          hashnodeToken: ''
         },
-        onSubmit: (values: any) => {
-            console.log(blog)
+        onSubmit: async (values: any) => {
             console.log(values)
+            await Api.publishArticle(blog, values.title, values.tags, values.hashnodeToken, values.mediumToken, values.devtoToken)
         },
     })
     return (
@@ -32,7 +34,7 @@ export const Publish: React.FC<{}> = () => {
                             justifyContent='center'
                         >
                             <Grid item xs={6}>
-                                <h1 style={{ color: '#442C2E' }}>Put in your tokens below</h1>
+                                <h1 style={{ color: '#442C2E' }}>Little more information about the blog!</h1>
                             </Grid>
                         </Grid>
                         <Grid
@@ -40,6 +42,37 @@ export const Publish: React.FC<{}> = () => {
                             direction='row'
                             justifyContent='center'
                         >
+                            <Grid item xs={3}>
+                                <TextField
+                                    style={{ margin: '1rem' }}
+                                    id='title'
+                                    name='title'
+                                    label='Blog Title'
+                                    variant='outlined'
+                                    onChange={formik.handleChange}
+                                    value={formik.values.title}
+                                    required
+                                />
+                            </Grid>
+                            <FormikProvider value={formik}>
+                                <Grid item xs={3}>
+                                    <Field
+                                        component={ChipInput}
+                                        label='Blog tags'
+                                        variant='outlined'
+                                        {...formik.getFieldProps('tags')}
+                                    />
+                                </Grid>
+                            </FormikProvider>
+                        </Grid>
+                        <Grid
+                            container
+                            direction='row'
+                            justifyContent='center'
+                        >
+                            <Grid item xs={3}>
+                                <Typography variant='h4' component='div' gutterBottom style={{ color: '#442C2E', marginTop: '1.5rem' }}>Medium Token:</Typography>
+                            </Grid>
                             <Grid item xs={3}>
                                 <TextField
                                     style={{ margin: '1rem' }}
@@ -51,17 +84,6 @@ export const Publish: React.FC<{}> = () => {
                                     value={formik.values.mediumToken}
                                 />
                             </Grid>
-                            <Grid item xs={3}>
-                                <TextField
-                                    style={{ margin: '1rem' }}
-                                    id='mediumAuth'
-                                    name='mediumAuth'
-                                    label='Medium Auth Token'
-                                    variant='outlined'
-                                    onChange={formik.handleChange}
-                                    value={formik.values.mediumAuth}
-                                />
-                            </Grid>
                         </Grid>
                         <Grid
                             container
@@ -69,25 +91,17 @@ export const Publish: React.FC<{}> = () => {
                             justifyContent='center'
                         >
                             <Grid item xs={3}>
+                                <Typography variant='h4' component='div' gutterBottom style={{ color: '#442C2E', marginTop: '1.5rem' }}>Dev.to Token:</Typography>
+                            </Grid>
+                            <Grid item xs={3}>
                                 <TextField
                                     style={{ margin: '1rem' }}
-                                    id='devToken'
-                                    name='devToken'
+                                    id='devtoToken'
+                                    name='devtoToken'
                                     label='Dev.to Token'
                                     variant='outlined'
                                     onChange={formik.handleChange}
-                                    value={formik.values.devToken}
-                                />
-                            </Grid>
-                            <Grid item xs={3}>
-                                <TextField
-                                    style={{ margin: '1rem' }}
-                                    id='devAuth'
-                                    name='devAuth'
-                                    label='Dev.to Auth'
-                                    variant='outlined'
-                                    onChange={formik.handleChange}
-                                    value={formik.values.devAuth}
+                                    value={formik.values.devtoToken}
                                 />
                             </Grid>
                         </Grid>
@@ -96,6 +110,9 @@ export const Publish: React.FC<{}> = () => {
                             direction='row'
                             justifyContent='center'
                         >
+                            <Grid item xs={3}>
+                                <Typography variant='h4' component='div' gutterBottom style={{ color: '#442C2E', marginTop: '1.5rem' }}>Hashnode Token:</Typography>
+                            </Grid>
                             <Grid item xs={3}>
                                 <TextField
                                     style={{ margin: '1rem' }}
@@ -105,17 +122,6 @@ export const Publish: React.FC<{}> = () => {
                                     variant='outlined'
                                     onChange={formik.handleChange}
                                     value={formik.values.hashnodeToken}
-                                />
-                            </Grid>
-                            <Grid item xs={3}>
-                                <TextField
-                                    style={{ margin: '1rem' }}
-                                    id='hashnodeAuth'
-                                    name='hashnodeAuth'
-                                    label='Hash node Auth'
-                                    variant='outlined'
-                                    onChange={formik.handleChange}
-                                    value={formik.values.hashnodeAuth}
                                 />
                             </Grid>
                         </Grid>
