@@ -2,8 +2,9 @@ import React from 'react'
 import './publish.css'
 import { useFormik } from 'formik'
 import { Api } from '../../../Api'
-import { Field, FormikProvider } from 'formik'
 import { Appbar } from '../../Common/Appbar'
+import { Field, FormikProvider } from 'formik'
+import { error } from '../../../utilities/toast'
 import { useAppSelector } from '../../../redux/hooks'
 import { ChipInput } from 'material-ui-formik-components'
 import { TextField, Button, Grid, Typography } from '@mui/material'
@@ -19,7 +20,10 @@ export const Publish: React.FC<{}> = () => {
           hashnodeToken: ''
         },
         onSubmit: async (values: any) => {
-            console.log(values)
+            if(!values.hashnodeToken && !values.mediumToken && !values.devtoToken) {
+                error('Enter atleast one token to proceed.')
+                return;
+            }
             await Api.publishArticle(blog, values.title, values.tags, values.hashnodeToken, values.mediumToken, values.devtoToken)
         },
     })

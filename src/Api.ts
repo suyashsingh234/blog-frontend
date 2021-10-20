@@ -86,19 +86,39 @@ function JSONtoHTML(article: any) {
 export class Api {
     static publishArticle(article: any, title: string, tags: string[], hashnodeToken: string, mediumToken: string, devtoToken: string) {
         var HTMLarticle = JSONtoHTML(article)
-        var url = baseUrl + 'post?'
-        url  +=  hashnodeToken ? `&hashnode=True&hashnodeToken=${hashnodeToken}` : `hashnode=$False`
-        url  +=  mediumToken ? `&medium=True&mediumToken=${mediumToken}` : `medium=$False`
-        url  +=  devtoToken ? `&devto=True&devtoToken=${devtoToken}` : `devto=$False`
+
+        var content: any = {}
+        content['title'] = title
+        content['contentFormat'] = 'html'
+        content['HTMLarticle'] = HTMLarticle
+        content['jsonContent'] = article
+        content['tags'] = tags
+        content['publishStatus'] = 'public'
+
+        var formData: any = {}
+        if(hashnodeToken) {
+            formData['hashnodeToken'] = hashnodeToken
+            formData['hashnode'] = 'True'
+        } else
+            formData['hashnode'] = 'False'
+        if(mediumToken) {
+            formData['mediumToken'] = mediumToken
+            formData['medium'] = 'True'
+        } else
+            formData['medium'] = 'False'
+        if(devtoToken) {
+            formData['devtoToken'] = devtoToken
+            formData['devto'] = 'True'
+        } else
+            formData['devto'] = 'False'
+
+        formData['content'] = JSON.stringify(content)
+
+        console.log(JSON.stringify(formData))
         try {
             return (
-                axios.post(url, {
-                    title: title,
-                    contentFormat: 'html',
-                    content: HTMLarticle,
-                    jsonContent: article,
-                    tags: tags,
-                    publishStatus: 'public'
+                axios.post(baseUrl + 'post', {
+                    'content': JSON.stringify(formData)
                 })
                 .then((res) => {
                     if(res.status === 200) {
