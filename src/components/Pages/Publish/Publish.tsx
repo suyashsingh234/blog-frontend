@@ -28,7 +28,7 @@ export const Publish: React.FC<{}> = () => {
             <Appbar back={ true } />
             <div>
                 <form onSubmit={formik.handleSubmit}>
-                    <Grid container style={{ margin: '3rem' }}>
+                    <Grid container style={{ marginTop: '3rem', marginBottom: '3rem' }}>
                         <Grid
                             container
                             direction='row'
@@ -134,7 +134,12 @@ export const Publish: React.FC<{}> = () => {
                             style={{
                                 backgroundColor: '#FEDBD0',
                                 color: '#442C2E',
-                                marginBottom: '3rem'
+                                marginBottom: '3rem',
+                                paddingLeft: '1rem',
+                                paddingRight: '1rem',
+                                paddingTop: '0.5rem',
+                                paddingBottom: '0.5rem',
+                                borderRadius: '5px'
                             }}
                         >
                             Lessgo!

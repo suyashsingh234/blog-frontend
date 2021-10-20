@@ -12,7 +12,7 @@ export const Appbar: React.FC<{ back?: boolean}> = ({ back }) => {
                     { back ? (
                         <>
                             <IconButton
-                                style={{ color: '#442C2E' }}
+                                style={{ color: '#442C2E', margin: '1rem', padding: '0.5rem' }}
                                 size='large'
                                 edge='start'
                                 color='inherit'
