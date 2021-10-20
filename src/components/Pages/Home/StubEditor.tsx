@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom'
 import { useAppSelector } from '../../../redux/hooks'
 import { BlogStateActions } from '../../../redux/slices/BlogState'
 
-export const Editor: React.FC<{}> = () => {
+export const StubEditor: React.FC<{}> = () => {
     let history = useHistory()
     const dispatch = useDispatch()
     const [data, setData] = useState(useAppSelector((state) => state.BlogState.blog))

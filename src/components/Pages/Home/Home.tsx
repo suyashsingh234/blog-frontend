@@ -1,5 +1,5 @@
 import React from 'react'
-import { Editor } from './Editor'
+import { StubEditor } from './StubEditor'
 import { Typography } from '@mui/material'
 import { Appbar } from '../../Common/Appbar'
 
@@ -12,7 +12,7 @@ export const Home: React.FC<{}> = () => {
                     draft YOUR thoughts below :))
                 </Typography>
             </div>
-            <Editor />
+            <StubEditor />
         </>
     )
 }

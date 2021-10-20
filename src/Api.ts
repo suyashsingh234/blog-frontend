@@ -117,9 +117,7 @@ export class Api {
         console.log(JSON.stringify(formData))
         try {
             return (
-                axios.post(baseUrl + 'post', {
-                    'content': JSON.stringify(formData)
-                })
+                axios.post(baseUrl + 'post', JSON.stringify(formData))
                 .then((res) => {
                     if(res.status === 200) {
                         success('Article published')
