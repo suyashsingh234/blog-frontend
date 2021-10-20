@@ -90,12 +90,12 @@ export class Api {
         var content: any = {}
         content['title'] = title
         content['contentFormat'] = 'html'
-        content['HTMLarticle'] = HTMLarticle
-        content['jsonContent'] = article
+        content['content'] = HTMLarticle
         content['tags'] = tags
         content['publishStatus'] = 'public'
 
         var formData: any = {}
+        formData['content'] = JSON.stringify(content)
         if(hashnodeToken) {
             formData['hashnodeToken'] = hashnodeToken
             formData['hashnode'] = 'True'
@@ -112,9 +112,6 @@ export class Api {
         } else
             formData['devto'] = 'False'
 
-        formData['content'] = JSON.stringify(content)
-
-        console.log(JSON.stringify(formData))
         try {
             return (
                 axios.post(baseUrl + 'post', JSON.stringify(formData))
