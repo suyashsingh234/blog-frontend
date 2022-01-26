@@ -40,7 +40,7 @@ export const Publish: React.FC<{}> = () => {
                         >
                             <Grid item xs={6}>
                                 <h1 style={{ color: '#442C2E' }}>Little more information about the blog!</h1>
-                                <p style={{ color: '#442C2E' }}>Read about how to get tokens <a href='/#/help'>here</a></p>
+                                <p style={{ color: '#442C2E' }}>Read about how to get tokens <a href='/help'>here</a></p>
                             </Grid>
                         </Grid>
                         <Grid
